@@ -1,57 +1,161 @@
-// export async function generateReview(prompt: string, env: Env) {
-//   const response = await fetch(
-//     `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${env.GEMINI_API_KEY}`,
-//     {
-//       method: "POST",
-//       headers: {
-//         "Content-Type": "application/json",
-//       },
-//       body: JSON.stringify({
-//         contents: [
-//           {
-//             parts: [
-//               {
-//                 text: prompt,
-//               },
-//             ],
-//           },
-//         ],
-//       }),
-//     }
-//   );
+type GeminiEnv = Env & {
+  GEMINI_API_KEY?: string;
+};
 
-//   if (!response.ok) {
-//     const error = await response.text();
+type GeminiResponse = {
+  candidates?: Array<{
+    finishReason?: string;
+    content?: {
+      parts?: Array<{
+        text?: string;
+      }>;
+    };
+  }>;
+};
 
-//     console.log("Gemini error:", error);
+const model = "gemini-3.5-flash-lite";
 
-//     throw new Error(
-//         `Gemini failed: ${response.status} ${error}`
-//     );
-//   }
+const reviewSchema = {
+  type: "object",
+  properties: {
+    summary: {
+      type: "string",
+    },
+    strengths: {
+      type: "array",
+      items: {
+        type: "string",
+      },
+    },
+    concerns: {
+      type: "array",
+      items: {
+        type: "string",
+      },
+    },
+    recruiterImpression: {
+      type: "string",
+    },
+    improvements: {
+      type: "array",
+      items: {
+        type: "string",
+      },
+    },
+    revisedText: {
+      type: "string",
+    },
+    quality: {
+      type: "object",
+      properties: {
+        overallScore: {
+          type: "integer",
+        },
+        label: {
+          type: "string",
+        },
+        relevance: {
+          type: "integer",
+        },
+        clarity: {
+          type: "integer",
+        },
+        evidence: {
+          type: "integer",
+        },
+        impact: {
+          type: "integer",
+        },
+      },
+      required: [
+        "overallScore",
+        "label",
+        "relevance",
+        "clarity",
+        "evidence",
+        "impact",
+      ],
+    },
+  },
+  required: [
+    "summary",
+    "strengths",
+    "concerns",
+    "recruiterImpression",
+    "improvements",
+    "revisedText",
+    "quality",
+  ],
+};
 
-//   const data = await response.json();
+export async function generateReview(
+  prompt: string,
+  env: GeminiEnv,
+): Promise<string> {
+  if (!env.GEMINI_API_KEY) {
+    throw new Error("GEMINI_API_KEY is not configured.");
+  }
 
-//   return data.candidates[0].content.parts[0].text;
-// }
+  let response: Response;
 
+  try {
+    response = await fetch(
+      `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "x-goog-api-key": env.GEMINI_API_KEY,
+        },
+        body: JSON.stringify({
+          contents: [
+            {
+              parts: [{ text: prompt }],
+            },
+          ],
+          generationConfig: {
+            maxOutputTokens: 8192,
+            thinkingConfig: {
+              thinkingLevel: "low",
+            },
+            responseMimeType: "application/json",
+            responseSchema: reviewSchema,
+          },
+        }),
+      },
+    );
+  } catch {
+    throw new Error("Unable to reach Gemini.");
+  }
 
-export async function generateReview(prompt: string, env: Env) {
+  if (!response.ok) {
+    const errorBody = await response.text();
 
-  return JSON.stringify({
-    score: 85,
-    strengths: [
-      "React experience matches the role"
-    ],
-    weaknesses: [
-      "No backend experience mentioned"
-    ],
-    missingSkills: [
-      "Testing knowledge"
-    ],
-    suggestions: [
-      "Add project impact metrics"
-    ]
-  });
+    console.error("Gemini API error", {
+      status: response.status,
+      errorBody,
+    });
 
+    throw new Error(`Gemini request failed with status ${response.status}.`);
+  }
+
+  const data = (await response.json()) as GeminiResponse;
+  const candidate = data.candidates?.[0];
+
+  if (candidate?.finishReason === "MAX_TOKENS") {
+    throw new Error(
+      "Gemini stopped before completing the structured review response.",
+    );
+  }
+
+  const review = candidate?.content?.parts
+    ?.map((part) => part.text ?? "")
+    .join("")
+    .trim();
+
+  if (!review) {
+    throw new Error("Gemini returned no review text.");
+  }
+
+  return review;
 }
