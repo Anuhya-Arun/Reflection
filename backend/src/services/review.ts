@@ -60,6 +60,27 @@ function getQualityLabel(score: number): string {
   return "Early draft";
 }
 
+function normalizeComparableText(value: string): string {
+  return value.replace(/\s+/g, " ").trim().toLowerCase();
+}
+
+function getMeaningfulRewrite(
+  value: unknown,
+  originalApplication: string,
+): string {
+  const revisedText = asText(value, "");
+
+  if (
+    !revisedText ||
+    normalizeComparableText(revisedText) ===
+      normalizeComparableText(originalApplication)
+  ) {
+    return "";
+  }
+
+  return revisedText;
+}
+
 function extractJsonObject(rawReview: string): string {
   const firstBrace = rawReview.indexOf("{");
   const lastBrace = rawReview.lastIndexOf("}");
@@ -104,7 +125,10 @@ function parseReview(
       "No recruiter impression was generated.",
     ),
     improvements: asTextList(review.improvements),
-    revisedText: asText(review.revisedText, originalApplication),
+    revisedText: getMeaningfulRewrite(
+      review.revisedText,
+      originalApplication,
+    ),
     quality: {
       overallScore,
       label: asText(quality?.label, getQualityLabel(overallScore)),
@@ -154,7 +178,7 @@ Use exactly this shape:
   "improvements": [
     "Specific, practical improvement the applicant can make"
   ],
-  "revisedText": "A complete improved rewrite of the supplied candidate application.",
+  "revisedText": "A complete improved rewrite, or an empty string if no safe improvement is possible.",
   "quality": {
     "overallScore": 0,
     "label": "Early draft, Needs work, Promising, Strong, or Excellent",
@@ -171,8 +195,11 @@ Rules:
 - Give 2 to 4 useful items for strengths, concerns, and improvements.
 - Keep feedback concise and actionable.
 - revisedText must rewrite the complete supplied candidate application.
+- revisedText must be meaningfully different from the supplied application; never repeat it unchanged.
+- Improve relevance, clarity, evidence, impact, or recruiter readability where possible.
 - Keep the candidate's first-person voice and preserve all truthful facts.
 - Never invent achievements, qualifications, numbers, employers, or experiences.
+- If no safe meaningful rewrite is possible, return an empty revisedText string.
 - revisedText must be plain text only, without Markdown or commentary.
 `;
 
