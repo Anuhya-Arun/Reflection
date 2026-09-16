@@ -18,6 +18,11 @@
         padding: 18px;
       }
 
+      button,
+      textarea {
+        font: inherit;
+      }
+
       .header {
         margin-bottom: 18px;
       }
@@ -28,9 +33,10 @@
         font-size: 23px;
       }
 
-      .header p {
+      .header p,
+      .help {
         margin: 6px 0 0;
-        color: #666666;
+        color: #666;
         font-size: 13px;
         line-height: 1.45;
       }
@@ -39,16 +45,16 @@
         display: grid;
         grid-template-columns: 1fr 1fr;
         gap: 6px;
-        margin-bottom: 18px;
+        margin: 18px 0;
         padding: 4px;
         border-radius: 12px;
         background: #f1edff;
       }
 
       .tab {
-        padding: 9px 8px;
-        border: none;
+        border: 0;
         border-radius: 9px;
+        padding: 9px;
         color: #5f00ee;
         background: transparent;
         font-size: 13px;
@@ -59,43 +65,38 @@
       .tab-active {
         color: #ffffff;
         background: #6d4aff;
-        box-shadow: 0 2px 8px rgba(109, 74, 255, 0.28);
       }
 
-      .panel {
+      .panel,
+      .result {
         display: none;
       }
 
-      .panel-active {
+      .panel-active,
+      .result-visible {
         display: block;
       }
 
       label {
         display: block;
         margin-bottom: 7px;
-        color: #333333;
+        color: #333;
         font-size: 13px;
         font-weight: 700;
       }
 
-      .help {
-        margin: 0 0 10px;
-        color: #666666;
-        font-size: 13px;
-        line-height: 1.45;
-      }
-
       textarea {
         width: 100%;
-        min-height: 190px;
+        min-height: 185px;
         resize: vertical;
-        margin-bottom: 12px;
+        margin: 12px 0;
         padding: 11px;
         border: 1px solid #d8d3e8;
         border-radius: 11px;
         color: #242424;
         background: #ffffff;
-        font: 13px/1.45 Arial, sans-serif;
+        font-size: 13px;
+        line-height: 1.45;
       }
 
       textarea:focus {
@@ -103,14 +104,10 @@
         outline: 2px solid rgba(109, 74, 255, 0.16);
       }
 
-      button {
-        font-family: inherit;
-      }
-
       .primary-button {
         width: 100%;
         padding: 12px;
-        border: none;
+        border: 0;
         border-radius: 11px;
         color: #ffffff;
         background: #6d4aff;
@@ -119,15 +116,9 @@
         cursor: pointer;
       }
 
-      .primary-button:disabled,
-      .review-choice:disabled {
-        cursor: wait;
-        opacity: 0.7;
-      }
-
       .review-choice {
         width: 100%;
-        margin-bottom: 10px;
+        margin-top: 10px;
         padding: 14px;
         border: 1px solid #e0dcef;
         border-radius: 12px;
@@ -154,9 +145,37 @@
       }
 
       .review-choice span {
-        color: #666666;
+        color: #666;
         font-size: 13px;
-        line-height: 1.45;
+        line-height: 1.4;
+      }
+
+      button:disabled {
+        cursor: wait;
+        opacity: 0.7;
+      }
+
+      .usage {
+        margin: 0 0 12px;
+        padding: 10px;
+        border-radius: 10px;
+        color: #4a337e;
+        background: #f0edff;
+        font-size: 13px;
+        line-height: 1.4;
+      }
+
+      .authorize-button {
+        display: inline;
+        margin-left: 4px;
+        padding: 3px 6px;
+        border: 0;
+        border-radius: 6px;
+        color: #ffffff;
+        background: #6d4aff;
+        font-size: 12px;
+        font-weight: 700;
+        cursor: pointer;
       }
 
       .status {
@@ -187,50 +206,35 @@
         background: #edfff3;
       }
 
-      .result {
-        display: none;
-        margin-top: 15px;
-      }
-
-      .result-visible {
-        display: block;
-      }
-
-      .summary-card,
-      .feedback-section,
-      .rewrite-card {
-        margin-bottom: 12px;
+      .card {
+        margin-top: 12px;
         padding: 13px;
         border: 1px solid #e7e4ef;
         border-radius: 12px;
-        background: #ffffff;
       }
 
-      .summary-card {
+      .summary {
         border-color: #ded7ff;
         background: #f5f2ff;
       }
 
-      .summary-card h2,
-      .rewrite-card h3 {
-        margin: 0 0 7px;
-        color: #5f00ee;
-        font-size: 15px;
+      .card h2,
+      .card h3 {
+        margin: 0 0 8px;
+        color: #303030;
+        font-size: 14px;
       }
 
-      .summary-card p,
-      .feedback-section p,
-      .rewrite-card p {
+      .summary h2,
+      .rewrite-card h3 {
+        color: #5f00ee;
+      }
+
+      .card p {
         margin: 0;
         color: #4c4c4c;
         font-size: 13px;
         line-height: 1.5;
-      }
-
-      .feedback-section h3 {
-        margin: 0 0 9px;
-        color: #303030;
-        font-size: 14px;
       }
 
       .feedback-list {
@@ -247,12 +251,12 @@
         padding-left: 15px;
         color: #4c4c4c;
         font-size: 13px;
-        line-height: 1.48;
+        line-height: 1.45;
       }
 
       .feedback-list li::before {
         position: absolute;
-        top: 0.48em;
+        top: 0.5em;
         left: 0;
         width: 6px;
         height: 6px;
@@ -261,58 +265,44 @@
         content: "";
       }
 
-      #revised-text {
-        min-height: 170px;
-        margin-top: 10px;
-      }
-
-      .secondary-help {
-        margin-bottom: 10px !important;
-        color: #666666 !important;
-      }
-
       .quality-card {
         margin-top: 16px;
         padding: 14px;
         border-radius: 14px;
-        color: #ffffff;
+        color: #fff;
         background: linear-gradient(135deg, #5f00ee, #815eff);
       }
 
-      .quality-heading {
+      .quality-top {
         display: flex;
-        align-items: flex-end;
+        align-items: end;
         justify-content: space-between;
-        gap: 12px;
         margin-bottom: 14px;
       }
 
-      .quality-heading p {
-        margin: 0 0 4px;
+      .quality-top p,
+      .quality-top h2 {
+        margin: 0;
+      }
+
+      .quality-top p {
         font-size: 11px;
         font-weight: 700;
         letter-spacing: 0.08em;
         text-transform: uppercase;
       }
 
-      .quality-heading h2 {
-        margin: 0;
+      .quality-top h2 {
+        margin-top: 4px;
         font-size: 18px;
       }
 
-      .quality-score {
-        font-size: 30px;
+      .overall-score {
+        font-size: 24px;
         font-weight: 800;
-        line-height: 1;
       }
 
-      .quality-score span {
-        font-size: 13px;
-        font-weight: 600;
-        opacity: 0.85;
-      }
-
-      .metric-grid {
+      .metrics {
         display: grid;
         grid-template-columns: 1fr 1fr;
         gap: 8px;
@@ -328,7 +318,6 @@
         display: block;
         margin-bottom: 4px;
         font-size: 11px;
-        opacity: 0.85;
       }
 
       .metric strong {
@@ -355,7 +344,7 @@
     <section id="opportunity-panel" class="panel panel-active">
       <label for="opportunity">Opportunity description</label>
       <p class="help">
-        Paste the job, internship, scholarship, or programme description here.
+        Paste the job, internship, scholarship, or programme description.
       </p>
 
       <textarea
@@ -371,9 +360,10 @@
     </section>
 
     <section id="review-panel" class="panel">
+      <p id="usage" class="usage">Loading review allowance...</p>
+
       <p class="help">
-        Select text directly in Google Docs, then use the highlighted-text
-        option for focused feedback.
+        Select text directly in Google Docs for focused feedback and a rewrite.
       </p>
 
       <button type="button" class="review-choice" id="review-full-document">
@@ -381,51 +371,49 @@
         <span>Get recruiter feedback on the complete application.</span>
       </button>
 
-      <div id="full-review-status" class="status" role="status"></div>
-
       <button
         type="button"
         class="review-choice"
         id="review-highlighted-text"
       >
         <strong>Review highlighted text</strong>
-        <span>Get feedback and a rewrite for the selected Docs text.</span>
+        <span>Get feedback and a rewrite for selected Docs text.</span>
       </button>
 
-      <div id="highlighted-review-status" class="status" role="status"></div>
+      <div id="review-status" class="status" role="status"></div>
     </section>
 
     <section id="result" class="result" aria-label="Recruiter review">
-      <div class="summary-card">
+      <section class="card summary">
         <h2>Recruiter summary</h2>
         <p id="summary"></p>
-      </div>
+      </section>
 
-      <section class="feedback-section">
+      <section class="card">
         <h3>Strengths</h3>
         <ul id="strengths" class="feedback-list"></ul>
       </section>
 
-      <section class="feedback-section">
+      <section class="card">
         <h3>Concerns</h3>
         <ul id="concerns" class="feedback-list"></ul>
       </section>
 
-      <section class="feedback-section">
+      <section class="card">
         <h3>Recruiter impression</h3>
         <p id="recruiter-impression"></p>
       </section>
 
-      <section class="feedback-section">
+      <section class="card">
         <h3>Suggested improvements</h3>
         <ul id="improvements" class="feedback-list"></ul>
       </section>
 
-      <section id="rewrite-card" class="rewrite-card" hidden>
+      <section id="rewrite-card" class="card rewrite-card" hidden>
         <h3>Suggested rewrite</h3>
-        <p class="secondary-help">
-          Edit the rewrite if you wish. Keep the original reviewed text
-          selected in Google Docs before implementing it.
+        <p>
+          Edit this if you wish. Keep the original reviewed text selected in
+          Google Docs before implementing it.
         </p>
 
         <textarea id="revised-text"></textarea>
@@ -437,19 +425,17 @@
         <div id="implement-status" class="status" role="status"></div>
       </section>
 
-      <section class="quality-card" aria-label="Application quality">
-        <div class="quality-heading">
+      <section class="quality-card">
+        <div class="quality-top">
           <div>
-            <p>Application quality</p>
+            <p>Selected Text Quality</p>
             <h2 id="quality-label"></h2>
           </div>
 
-          <div class="quality-score">
-            <span id="overall-score"></span>
-          </div>
+          <div id="overall-score" class="overall-score"></div>
         </div>
 
-        <div class="metric-grid">
+        <div class="metrics">
           <div class="metric">
             <span>Relevance</span>
             <strong id="relevance-score"></strong>
@@ -475,23 +461,28 @@
 
     <script>
       const opportunityInput = document.getElementById("opportunity");
+      const usageElement = document.getElementById("usage");
       const result = document.getElementById("result");
       const opportunityStatus = document.getElementById("opportunity-status");
-      const fullReviewStatus = document.getElementById("full-review-status");
-      const highlightedReviewStatus = document.getElementById(
-        "highlighted-review-status",
-      );
+      const reviewStatus = document.getElementById("review-status");
       const implementStatus = document.getElementById("implement-status");
-      const tabs = Array.from(document.querySelectorAll(".tab"));
       const rewriteCard = document.getElementById("rewrite-card");
       const revisedTextInput = document.getElementById("revised-text");
+      const tabs = Array.from(document.querySelectorAll(".tab"));
 
       let lastReviewedText = "";
       let lastReviewScope = "";
+      let authorizationRequired = false;
+      let authorizationUrl = "";
+      let authorizationPollingTimer = null;
+      let waitingForAuthorization = false;
 
       google.script.run
         .withSuccessHandler(function (state) {
-          opportunityInput.value = state.opportunity || "";
+          applySidebarState(state, false);
+        })
+        .withFailureHandler(function (error) {
+          showError(reviewStatus, error);
         })
         .getSidebarState();
 
@@ -504,22 +495,18 @@
       document
         .getElementById("save-opportunity")
         .addEventListener("click", function () {
-          setActionStatus(
-            opportunityStatus,
-            "Saving opportunity description...",
-            "info",
-          );
+          setStatus(opportunityStatus, "Saving opportunity...", "info");
 
           google.script.run
             .withSuccessHandler(function () {
-              setActionStatus(
+              setStatus(
                 opportunityStatus,
-                "Opportunity description saved for this document.",
+                "Opportunity saved for this document.",
                 "success",
               );
             })
             .withFailureHandler(function (error) {
-              showActionError(opportunityStatus, error);
+              showError(opportunityStatus, error);
             })
             .saveOpportunity(opportunityInput.value);
         });
@@ -542,7 +529,7 @@
           const revisedText = revisedTextInput.value.trim();
 
           if (!lastReviewedText || !revisedText) {
-            setActionStatus(
+            setStatus(
               implementStatus,
               "Review highlighted text first before implementing a rewrite.",
               "error",
@@ -550,40 +537,233 @@
             return;
           }
 
-          if (
-            !window.confirm(
-              "Replace the currently selected Google Docs text with this suggested rewrite?",
-            )
-          ) {
-            return;
-          }
-
           setBusy(true);
-
-          setActionStatus(
+          setStatus(
             implementStatus,
-            "Applying the suggested rewrite in Google Docs...",
+            "Applying the suggested rewrite...",
             "info",
           );
 
           google.script.run
             .withSuccessHandler(function () {
               setBusy(false);
-
-              setActionStatus(
+              setStatus(
                 implementStatus,
                 "Changes implemented in your Google Doc.",
                 "success",
               );
-
               rewriteCard.hidden = true;
             })
             .withFailureHandler(function (error) {
               setBusy(false);
-              showActionError(implementStatus, error);
+              showError(implementStatus, error);
             })
             .implementImprovedText(lastReviewedText, revisedText);
         });
+
+      function applySidebarState(state, wasWaitingForAuthorization) {
+        opportunityInput.value = state.opportunity || "";
+        authorizationRequired = Boolean(state.authorizationRequired);
+        authorizationUrl = state.authorizationUrl || "";
+
+        if (authorizationRequired) {
+          updateAuthorizationUi();
+          return;
+        }
+
+        stopAuthorizationPolling();
+        refreshUsage();
+
+        if (wasWaitingForAuthorization) {
+          showTab("review");
+          setStatus(
+            reviewStatus,
+            "Reflection is authorized and ready for your review.",
+            "success",
+          );
+        }
+      }
+
+      function updateAuthorizationUi() {
+        usageElement.innerHTML = "";
+
+        const message = document.createElement("span");
+        message.textContent =
+          "Reflection needs Google permission to protect your review allowance. ";
+
+        const authorizeButton = document.createElement("button");
+        authorizeButton.type = "button";
+        authorizeButton.textContent = waitingForAuthorization
+          ? "Waiting for approval..."
+          : "Authorize Reflection";
+        authorizeButton.className = "authorize-button";
+        authorizeButton.disabled = waitingForAuthorization;
+
+        authorizeButton.addEventListener("click", function () {
+          startAuthorization();
+        });
+
+        usageElement.appendChild(message);
+        usageElement.appendChild(authorizeButton);
+      }
+
+      function startAuthorization() {
+        if (!authorizationUrl) {
+          setStatus(
+            reviewStatus,
+            "Reflection could not open Google authorization. Close and reopen the sidebar, then try again.",
+            "error",
+          );
+          return;
+        }
+
+        waitingForAuthorization = true;
+        updateAuthorizationUi();
+
+        setStatus(
+          reviewStatus,
+          "Approve Google’s permission page. Reflection will continue automatically.",
+          "info",
+        );
+
+        window.open(authorizationUrl, "_blank");
+        checkAuthorizationProgress();
+
+        authorizationPollingTimer = window.setInterval(
+          checkAuthorizationProgress,
+          2000,
+        );
+      }
+
+      function checkAuthorizationProgress() {
+        google.script.run
+          .withSuccessHandler(function (state) {
+            applySidebarState(state, waitingForAuthorization);
+          })
+          .withFailureHandler(function () {
+            /* Authorization remains pending; keep checking. */
+          })
+          .getSidebarState();
+      }
+
+      function stopAuthorizationPolling() {
+        waitingForAuthorization = false;
+
+        if (authorizationPollingTimer !== null) {
+          window.clearInterval(authorizationPollingTimer);
+          authorizationPollingTimer = null;
+        }
+      }
+
+      function refreshUsage() {
+        if (authorizationRequired) {
+          return;
+        }
+
+        google.script.run
+          .withSuccessHandler(function (usage) {
+            usageElement.textContent =
+              `${usage.reviewsRemaining} of ${usage.monthlyLimit} free reviews remaining this month.`;
+          })
+          .withFailureHandler(function () {
+            usageElement.textContent =
+              "Reflection could not load your review allowance.";
+          })
+          .getReviewUsage();
+      }
+
+      function requestReview(scope) {
+        if (authorizationRequired) {
+          showTab("review");
+          setStatus(
+            reviewStatus,
+            "Authorize Reflection first. It will continue automatically once approved.",
+            "error",
+          );
+          return;
+        }
+
+        const opportunity = opportunityInput.value.trim();
+
+        if (!opportunity) {
+          showTab("opportunity");
+          setStatus(
+            opportunityStatus,
+            "Add an opportunity description before requesting a review.",
+            "error",
+          );
+          return;
+        }
+
+        result.classList.remove("result-visible");
+        result.dataset.hasResult = "false";
+        rewriteCard.hidden = true;
+        clearStatus(implementStatus);
+
+        setBusy(true);
+        setStatus(
+          reviewStatus,
+          scope === "full"
+            ? "Reviewing the full document..."
+            : "Reviewing the highlighted Google Docs text...",
+          "info",
+        );
+
+        const runner = google.script.run
+          .withSuccessHandler(function (response) {
+            setBusy(false);
+            clearStatus(reviewStatus);
+            showResult(response);
+          })
+          .withFailureHandler(function (error) {
+            setBusy(false);
+            showError(reviewStatus, error);
+            refreshUsage();
+          });
+
+        if (scope === "full") {
+          runner.reviewFullDocument(opportunity);
+        } else {
+          runner.reviewHighlightedText(opportunity);
+        }
+      }
+
+      function showResult(response) {
+        const review = response.review || {};
+        const quality = review.quality || {};
+
+        lastReviewedText = response.reviewedText || "";
+        lastReviewScope = response.scope || "";
+
+        setText("summary", review.summary);
+        setText("recruiter-impression", review.recruiterImpression);
+        renderList("strengths", review.strengths);
+        renderList("concerns", review.concerns);
+        renderList("improvements", review.improvements);
+
+        setText("quality-label", quality.label);
+        setText("overall-score", String(quality.overallScore || 0) + "/100");
+        setText("relevance-score", String(quality.relevance || 0) + "/100");
+        setText("clarity-score", String(quality.clarity || 0) + "/100");
+        setText("evidence-score", String(quality.evidence || 0) + "/100");
+        setText("impact-score", String(quality.impact || 0) + "/100");
+
+        const canImplement =
+          lastReviewScope === "highlighted text" &&
+          typeof review.revisedText === "string" &&
+          review.revisedText.trim();
+
+        rewriteCard.hidden = !canImplement;
+        revisedTextInput.value = canImplement ? review.revisedText.trim() : "";
+
+        if (response.usage) {
+          usageElement.textContent =
+            `${response.usage.reviewsRemaining} of ${response.usage.monthlyLimit} free reviews remaining this month.`;
+        }
+
+        result.dataset.hasResult = "true";
+        result.classList.add("result-visible");
+      }
 
       function showTab(tabName) {
         tabs.forEach(function (tab) {
@@ -602,90 +782,6 @@
           "result-visible",
           tabName === "review" && result.dataset.hasResult === "true",
         );
-      }
-
-      function requestReview(scope) {
-        const opportunity = opportunityInput.value.trim();
-        const actionStatus =
-          scope === "full" ? fullReviewStatus : highlightedReviewStatus;
-
-        if (!opportunity) {
-          showTab("opportunity");
-
-          setActionStatus(
-            opportunityStatus,
-            "Add an opportunity description before requesting a review.",
-            "error",
-          );
-
-          return;
-        }
-
-        result.classList.remove("result-visible");
-        result.dataset.hasResult = "false";
-        rewriteCard.hidden = true;
-        clearActionStatus(implementStatus);
-
-        setBusy(true);
-
-        setActionStatus(
-          actionStatus,
-          scope === "full"
-            ? "Reviewing the full document..."
-            : "Reviewing the highlighted Google Docs text...",
-          "info",
-        );
-
-        const runner = google.script.run
-          .withSuccessHandler(function (response) {
-            setBusy(false);
-            clearActionStatus(actionStatus);
-            showResult(response);
-          })
-          .withFailureHandler(function (error) {
-            setBusy(false);
-            showActionError(actionStatus, error);
-          });
-
-        if (scope === "full") {
-          runner.reviewFullDocument(opportunity);
-        } else {
-          runner.reviewHighlightedText(opportunity);
-        }
-      }
-
-      function showResult(response) {
-        const review = response.review || {};
-
-        lastReviewedText = response.reviewedText || "";
-        lastReviewScope = response.scope || "";
-
-        setText("summary", review.summary);
-        setText("recruiter-impression", review.recruiterImpression);
-
-        renderList("strengths", review.strengths);
-        renderList("concerns", review.concerns);
-        renderList("improvements", review.improvements);
-
-        const quality = review.quality || {};
-
-        setText("quality-label", quality.label);
-        setText("overall-score", String(quality.overallScore || 0) + "/100");
-        setText("relevance-score", String(quality.relevance || 0) + "/100");
-        setText("clarity-score", String(quality.clarity || 0) + "/100");
-        setText("evidence-score", String(quality.evidence || 0) + "/100");
-        setText("impact-score", String(quality.impact || 0) + "/100");
-
-        const canImplement =
-          lastReviewScope === "highlighted text" &&
-          typeof review.revisedText === "string" &&
-          review.revisedText.trim();
-
-        rewriteCard.hidden = !canImplement;
-        revisedTextInput.value = canImplement ? review.revisedText.trim() : "";
-
-        result.dataset.hasResult = "true";
-        result.classList.add("result-visible");
       }
 
       function setText(id, value) {
@@ -709,9 +805,8 @@
         });
       }
 
-      function setActionStatus(element, message, kind) {
+      function setStatus(element, message, kind) {
         element.textContent = message;
-
         element.className =
           "status status-visible " +
           (kind === "error"
@@ -721,18 +816,19 @@
               : "status-info");
       }
 
-      function clearActionStatus(element) {
+      function clearStatus(element) {
         element.textContent = "";
         element.className = "status";
       }
 
-      function showActionError(element, error) {
-        const message =
+      function showError(element, error) {
+        setStatus(
+          element,
           error && error.message
             ? error.message
-            : "Something went wrong. Please try again.";
-
-        setActionStatus(element, message, "error");
+            : "Something went wrong. Please try again.",
+          "error",
+        );
       }
     </script>
   </body>

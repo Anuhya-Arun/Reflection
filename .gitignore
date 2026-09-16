@@ -3,6 +3,11 @@ node_modules/
 dist/
 build/
 
+# Cloudflare Workers
+.wrangler/
+.dev.vars
+.dev.vars.*
+
 # Python
 __pycache__/
 *.py[cod]
@@ -11,6 +16,7 @@ venv/
 
 # Environment variables
 .env
+.env.*
 
 # IDE
 .vscode/
