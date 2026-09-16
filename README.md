@@ -203,6 +203,3 @@ Reflection is in private beta. It is intended for invited testers while product 
 * Usage analytics
 * Public Google Workspace Marketplace listing
 * Paid plans after beta validation
-
-```
-```
