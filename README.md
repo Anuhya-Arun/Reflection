@@ -1,4 +1,3 @@
-````markdown
 # Reflection
 
 Reflection is an AI-powered Google Docs Editor Add-on that helps applicants strengthen job, internship, scholarship, and programme applications through practical recruiter-style feedback.
@@ -50,7 +49,7 @@ Google Docs Editor Add-on
     │
     └── Gemini API
         └── Structured recruiter feedback and rewrite
-````
+```
 
 The Google Docs Add-on is the user-facing product.
 
