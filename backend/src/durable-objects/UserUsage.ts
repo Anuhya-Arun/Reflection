@@ -1,6 +1,6 @@
 import { DurableObject } from "cloudflare:workers";
 
-const MONTHLY_FREE_REVIEWS = 3;
+const MONTHLY_FREE_REVIEWS = 25;
 const RESERVATION_TTL_MS = 15 * 60 * 1000;
 
 type UsageState = {
