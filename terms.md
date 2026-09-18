@@ -10,8 +10,6 @@ By installing or using Reflection, you agree to these Terms.
 
 Reflection is currently available only to individuals who are 18 years of age or older.
 
-Do not use Reflection if you are under 18.
-
 ## 2. Reflection is a beta product
 
 Reflection is currently offered as a limited free beta. Features may change, be interrupted, become unavailable, or be removed without notice.

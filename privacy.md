@@ -8,7 +8,7 @@ This Privacy Policy explains how Reflection processes information when you use t
 
 ## 1. Eligibility
 
-Reflection is currently available only to users who are **18 years of age or older**.
+Reflection is currently available only to users who are 18 years of age or older.
 
 Reflection uses the Gemini API. Gemini’s current API terms do not permit API clients that are directed to, or likely to be accessed by, individuals under 18. Do not use Reflection if you are under 18.
 
@@ -111,7 +111,7 @@ No system can guarantee absolute security. Please avoid submitting sensitive, co
 
 You can choose not to use Reflection for any document or passage.
 
-You can edit any suggested rewrite before applying it. Reflection changes your Google Doc only after you select **Implement changes in Google Docs**.
+You can edit any suggested rewrite before applying it. Reflection changes your Google Doc only after you select Implement changes in Google Docs.
 
 For privacy questions, support, or data-related requests, contact:
 
